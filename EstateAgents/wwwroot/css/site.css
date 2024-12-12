@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Delius&family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&display=swap');
 html {
   font-size: 14px;
 }
@@ -20,3 +21,53 @@ html {
 body {
   margin-bottom: 60px;
 }
+.navbg {
+    background-color: #003285;
+    
+}
+
+#logo{
+    height: 8vh;
+}
+#logotxt {
+    font-family: "Delius", cursive;
+    font-weight: 400;
+    font-style: normal;
+    color: #FF7F3E;
+   
+}
+.navbar-toggler-icon {
+    color: white;
+}
+
+#welcomeimg {
+    background-image: url("/Images/house-banner.png");
+    background-size: cover;
+    background-position: center calc(50% - 90px);
+    background-repeat: no-repeat;
+    height: 60vh;
+    margin-left: 8vw;
+    margin-right: 8vw;
+}
+
+.box {
+    background-color: #2A629A;
+}
+
+.btn {
+    background-color: #FFDA78;
+    color: black;
+    font-weight:bold;
+}
+    .btn:hover {
+        background-color: #FF7F3E;
+        color:white;
+    }
+.links{
+    text-decoration:none;
+    color: white;
+    text-decoration:underline;
+}
+    .links:hover {
+        color: #FF7F3E;
+    }
