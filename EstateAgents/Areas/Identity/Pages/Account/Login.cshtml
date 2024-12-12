@@ -8,7 +8,7 @@
 
 <div class="container">
     <div class="box p-3 rounded m-5">
-        <h1 class="text-light ms-3">@ViewData["Title"]</h1>
+        <h1 class="text-light ms-3 title">@ViewData["Title"]</h1>
 
         <form id="account" method="post" class="mb-3">
             <h2 class="text-light ms-3 fw-light">Use a local account to log in.</h2>
@@ -27,9 +27,9 @@
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
                 </div>
                 <div class="checkbox mb-3 mx-3 w-75">
-                    <label asp-for="Input.RememberMe" class="form-label">
-                        <input class="form-check-input text-light" asp-for="Input.RememberMe" />
-                        @Html.DisplayNameFor(m => m.Input.RememberMe)
+                    <label asp-for="Input.RememberMe" class="form-label d-flex ">
+                        <input class="form-check-input text-light me-2" asp-for="Input.RememberMe" />
+                        <p class="text-light">@Html.DisplayNameFor(m => m.Input.RememberMe)</p>
                     </label>
                 </div>
 
