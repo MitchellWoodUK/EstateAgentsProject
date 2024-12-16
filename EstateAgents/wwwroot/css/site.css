@@ -55,6 +55,16 @@ body {
     background-color: #2A629A;
 }
 
+@keyframes pulse {
+    0% {
+        transform: scale(1); /* Normal size */
+    }
+
+    100% {
+        transform: scale(1.03); /* Slightly larger */
+    }
+}
+
 .btn {
     background-color: #FFDA78;
     color: black;
@@ -63,8 +73,13 @@ body {
 }
     .btn:hover {
         background-color: #FF7F3E;
-        color:white;
+        color: white;
+        animation: pulse 1s; 
+        animation-fill-mode: forwards;
     }
+
+
+
 .links{
     text-decoration:none;
     color: white;
@@ -88,4 +103,34 @@ body {
 }
 .cardimg{
     width: 10vw;
+}
+
+@keyframes fadeIn{
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.fade {
+    animation: fadeIn 4s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeInUp{
+    0%{
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fadeUp{
+    animation: fadeInUp 2s ease-out;
+    animation-fill-mode: forwards;
+}
+
+.page{
+    height: 87vh;
 }
