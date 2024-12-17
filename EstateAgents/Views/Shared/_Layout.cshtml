@@ -1,4 +1,16 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject UserManager<EstateAgents.Models.CustomUserModel> UserManager
+@{
+    var user = await UserManager.GetUserAsync(User); //Get the current logged in user.
+    bool isAdmin = false;
+    if (user != null) {
+        //Check the users role, return true or false if they are an admin.
+        isAdmin = await UserManager.IsInRoleAsync(user, "Admin");
+    }
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -15,9 +27,9 @@
                 <a class="navbar-brand d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Index">
                     <img alt="logo" id="logo" src="~/Images/sign.png" />
                     <p id="logotxt" class="fs-2 mt-3 ms-3">Mitchell Moves - Estate Agents</p>
-                    </a>
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between ms-3">
@@ -34,6 +46,11 @@
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="" asp-action="">Contact Us</a>
                         </li>
+                        @if (isAdmin) {
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Admin" asp-action="Index">Admin Dashboard</a>
+                            </li>
+                        }
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
