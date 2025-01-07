@@ -12,7 +12,7 @@ namespace EstateAgents.Data
         {
         }
 
-
+        public DbSet<PropertyModel> Properties { get; set; }
     }
 }
 

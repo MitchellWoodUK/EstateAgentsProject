@@ -140,6 +140,15 @@ namespace EstateAgents.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
+                    //check if the user currently has any roles
+                    var userRoles = await _userManager.GetRolesAsync(user);
+
+                    if (userRoles.Count() == 0)
+                    {
+                        //if there are no roles, add them to the customer role.
+                        await _userManager.AddToRoleAsync(user, "Customer");
+                    }
+
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);
