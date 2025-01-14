@@ -1,5 +1,30 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<EstateAgents.Models.PropertyModel> //Expect to be sent a list of property models
 @{
+    ViewData["Title"] = "Listings";
 }
+
+<h1>Property Listings</h1>
+<h5>Below is a collection of all the properties we have on offer.</h5>
+
+<div class="container mt-5">
+    <div class="row">
+        @foreach (var property in Model){
+            <div class="col-md-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="@Url.Content("~/Images/" + property.Image)" alt="@property.Title" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">@property.Title</h5>
+                        <p class="card-text">@property.Address</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Bedrooms: @property.AmountofBedrooms</li>
+                        <li class="list-group-item">Bathrooms: @property.AmountofBathrooms</li>
+                    </ul>
+                    <div class="card-body">
+                        <a class="btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
