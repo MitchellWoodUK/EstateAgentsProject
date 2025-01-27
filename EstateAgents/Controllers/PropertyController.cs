@@ -1,5 +1,7 @@
 ﻿using EstateAgents.Data;
+using EstateAgents.Migrations;
 using EstateAgents.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EstateAgents.Controllers
@@ -23,6 +25,7 @@ namespace EstateAgents.Controllers
             return View(properties); //Send the list to the view
         }
 
+        [Authorize (Roles= "Admin, Staff")]
         //Get: Property/Create
         public IActionResult Create()
         {
@@ -80,6 +83,27 @@ namespace EstateAgents.Controllers
             }
             return View(property);
         }
+
+
+        [Authorize]
+        public IActionResult Details(int id)
+        {
+            //Fetch the property by the given Id.
+            var property = _context.Properties.Find(id);
+
+            if (property == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return View(property);
+            }
+        }
+
+
+
+
 
     }
 }

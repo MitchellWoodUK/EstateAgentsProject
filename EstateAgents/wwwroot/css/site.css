@@ -65,13 +65,13 @@ body {
     }
 }
 
-.btn {
+.btn-custom {
     background-color: #FFDA78;
     color: black;
     font-weight:bold;
     border: none;
 }
-    .btn:hover {
+    .btn-custom:hover {
         background-color: #FF7F3E;
         color: white;
         animation: pulse 1s; 
@@ -133,4 +133,11 @@ body {
 
 .page{
     height: 87vh;
+}
+
+#detailsimg{
+    width: 50vw;
+}
+.cardimg {
+
 }

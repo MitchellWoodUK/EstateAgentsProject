@@ -1,71 +1,74 @@
 ﻿@model EstateAgents.Models.PropertyModel
 
+<div class="container">
+    <form asp-action="Create" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label asp-for="Title" class="control-label"></label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
 
-<form asp-action="Create" method="post" enctype="multipart/form-data">
-    <div class="form-group">
-        <label asp-for="Title" class="control-label"></label>
-        <input asp-for="Title" class="form-control" />
-        <span asp-validation-for="Title" class="text-danger"></span>
-    </div>
+        <div class="form-group">
+            <label asp-for="Address" class="control-label"></label>
+            <input asp-for="Address" class="form-control" />
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="Address" class="control-label"></label>
-        <input asp-for="Address" class="form-control" />
-        <span asp-validation-for="Address" class="text-danger"></span>
-    </div>
+        <div class="form-group">
+            <label asp-for="Price" class="control-label"></label>
+            <input asp-for="Price" class="form-control" type="number" step="0.01" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="Price" class="control-label"></label>
-        <input asp-for="Price" class="form-control" type="number" step="0.01" />
-        <span asp-validation-for="Price" class="text-danger"></span>
-    </div>
+        <div class="form-group">
+            <label asp-for="PropertyType" class="control-label"></label>
+            <select asp-for="PropertyType" class="form-control">
+                @foreach (var type in Enum.GetValues(typeof(PropertyType)))
+                {
+                    <option value="@type">@type</option>
+                }
+            </select>
+            <span asp-validation-for="PropertyType" class="text-danger"></span>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="PropertyType" class="control-label"></label>
-        <select asp-for="PropertyType" class="form-control">
-            @foreach (var type in Enum.GetValues(typeof(PropertyType))){
-                <option value="@type">@type</option>
-            }
-        </select>
-        <span asp-validation-for="PropertyType" class="text-danger"></span>
-    </div>
+        <div class="form-group">
+            <label asp-for="AmountofBedrooms" class="control-label"></label>
+            <input asp-for="AmountofBedrooms" class="form-control" type="number" />
+            <span asp-validation-for="AmountofBedrooms" class="text-danger"></span>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="AmountofBedrooms" class="control-label"></label>
-        <input asp-for="AmountofBedrooms" class="form-control" type="number"/>
-        <span asp-validation-for="AmountofBedrooms" class="text-danger"></span>
-    </div>
+        <div class="form-group">
+            <label asp-for="AmountofBathrooms" class="control-label"></label>
+            <input asp-for="AmountofBathrooms" class="form-control" type="number" />
+            <span asp-validation-for="AmountofBathrooms" class="text-danger"></span>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="AmountofBathrooms" class="control-label"></label>
-        <input asp-for="AmountofBathrooms" class="form-control" type="number" />
-        <span asp-validation-for="AmountofBathrooms" class="text-danger"></span>
-    </div>
+        <div class="form-group">
+            <label asp-for="Description" class="control-label"></label>
+            <textarea asp-for="Description" class="form-control"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="Description" class="control-label"></label>
-        <textarea asp-for="Description" class="form-control"></textarea>
-        <span asp-validation-for="Description" class="text-danger"></span>
-    </div>
+        <div class="form-group">
+            <label asp-for="Image" class="control-label"></label>
+            <input type="file" name="imageFile" class="form-control" />
+            <span asp-validation-for="Image" class="text-danger"></span>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="Image" class="control-label"></label>
-        <input type="file" name="imageFile" class="form-control" />
-        <span asp-validation-for="Image" class="text-danger"></span>
-    </div>
+        <div class="form-group">
+            <label asp-for="M2" class="control-label"></label>
+            <input asp-for="M2" class="form-control" type="number" />
+            <span asp-validation-for="M2" class="text-danger"></span>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="M2" class="control-label"></label>
-        <input asp-for="M2" class="form-control" type="number" />
-        <span asp-validation-for="M2" class="text-danger"></span>
-    </div>
+        <div class="form-group">
+            <label asp-for="AmountofParking" class="control-label"></label>
+            <input asp-for="AmountofParking" class="form-control" type="number" />
+            <span asp-validation-for="AmountofParking" class="text-danger"></span>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="AmountofParking" class="control-label"></label>
-        <input asp-for="AmountofParking" class="form-control" type="number" />
-        <span asp-validation-for="AmountofParking" class="text-danger"></span>
-    </div>
+        <button type="submit" class="btn btn-success">Create</button>
+    </form>
+</div>
 
-    <button type="submit" class="btn btn-success">Create</button>
-</form>
 

@@ -1,0 +1,37 @@
+﻿@model EstateAgents.Models.PropertyModel
+
+<a asp-action="Index" class="btn btn-custom ms-5 mt-5">Back</a>
+<div class="container mt-5">
+    
+    <img id="detailsimg" src="@Url.Content("~/Images/" + @Model.Image)" alt="@Model.Title">
+    <h4 class="mt-3">@Model.Title</h4>
+    <p class="text-muted">@Model.Address</p>
+    <p class="text-muted">Listed Since: @Model.ListingDate</p>
+    <h4>£@Model.Price</h4>
+    <hr />
+    <div class="row">
+        <div class="col">
+            <p class="text-muted">Property Type</p>
+            <p>@Model.PropertyType</p>
+        </div>
+        <div class="col">
+            <p class="text-muted">Bedroom Amount</p>
+            <p>@Model.AmountofBedrooms</p>
+        </div>
+        <div class="col">
+            <p class="text-muted">Bathroom Amount</p>
+            <p>@Model.AmountofBathrooms</p>
+        </div>
+        <div class="col">
+            <p class="text-muted">Parking Amount</p>
+            <p>@Model.AmountofParking</p>
+        </div>
+        <div class="col">
+            <p class="text-muted">Metres Squared</p>
+            <p>@Model.M2 m²</p>
+        </div>
+    </div>
+    <hr />
+    <h5>Description</h5>
+    <p>@Model.Description</p>
+</div>
