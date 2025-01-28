@@ -45,7 +45,7 @@
                             <td class="fw-bold">@property.Address</td>
                             <td>
                                 <a asp-action="Edit" asp-route-id="@property.Id" class="btn btn-warning">Edit</a>
-                                <a asp-action="Delete" asp-route-id="@property.Id" class="btn btn-danger">Delete</a>
+                                <a onclick="confirmDelete(@property.Id)" class="btn btn-danger">Delete</a>
                             </td>
                         </tr>
                     }
@@ -54,3 +54,23 @@
         </div>
     </div>
 </div>
+
+<script>
+    function confirmDelete(id){
+        //Display confirmation message
+        if(confirm("Are you sure you want to delete this property?")){
+            fetch(`/Property/Delete/${id}`,{
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(response => {
+                if(response.ok){
+                    window.location.reload(); //reload the page so that the property is removed
+                } else{
+                    alert("Failed to delete property!")
+                }
+            })
+        }
+    }
+</script>
