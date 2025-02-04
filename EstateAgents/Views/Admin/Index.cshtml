@@ -1,10 +1,10 @@
-﻿@model IEnumerable<EstateAgents.Models.PropertyModel>
+﻿@model EstateAgents.Models.AdminDashboardViewModel
 @{
     ViewData["Title"] = "Admin Dashboard";
 }
 
 
-<div class="container">
+<div class="p-5">
     <h1>Admin Dashboard</h1>
     <p class="mb-3">Welcome, Admin! Below is your dashboard.</p>
 
@@ -18,7 +18,44 @@
             </div>
             <div class="row">
                 <div class="col h-auto bg-white shadow-lg rounded-3">
-                    <h2>Current Roles</h2>
+                    <h2>Manage Users Roles</h2>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Telephone</th>
+                                <th>Current Roles</th>
+                                <th>Add Roles</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var user in Model.Users){
+                                List<string> currentuserRoles = Model.UserRoles[user.Id];
+                                <tr>
+                                    <td>@user.Name</td>
+                                    <td>@user.Email</td>
+                                    <td>@user.Telephone</td>
+                                    <td>
+                                    @foreach(var role in currentuserRoles){
+                                            @role<br /> 
+                                    }
+                                    </td>
+                                    <td>
+                                        <form asp-controller="Admin" asp-action="AssignRole" method="post" class="d-flex">
+                                            <input type="hidden" name="userID" value="@user.Id" />
+                                            <select name="roleName" class="form-select me-2">
+                                                @foreach(var role in Model.Roles){
+                                                    <option value="@role.Name">@role.Name</option>
+                                                }
+                                            </select>
+                                            <button type="submit" class="btn btn-success">Assign</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -37,7 +74,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var property in Model){
+                    @foreach (var property in Model.Properties){
                         <tr>
                             <td class="fw-bold">@property.Id</td>
                             <td class="fw-bold">@property.Title</td>
