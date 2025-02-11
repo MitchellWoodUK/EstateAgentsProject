@@ -13,9 +13,44 @@
         <div class="col mx-2">
             <div class="row">
                 <div class="col h-auto bg-white shadow-lg rounded-3 mb-3">
-                    <h2>Recent New Accounts</h2>
+                    <h2>Manage Roles</h2>
+                    <form asp-controller="Admin" asp-action="AddRole" method="post" class="mb-3 d-flex">
+                        <input type="text" name="roleName" class="form-control w-75 me-2" required placeholder="Enter the new role" />
+                        <button type="submit" class="btn btn-success w-25">Add Role</button>
+                    </form>
+                    <h3>Existing Roles</h3>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Role Name</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach(var role in Model.Roles){
+                                <tr>
+                                    <td>@role.Name</td>
+                                    <td>
+                                        <form asp-controller="Admin" asp-action="DeleteRole" method="post">
+                                            <input type="hidden" value="@role.Id" name="roleID" />
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+
+
+
+
                 </div>
             </div>
+
+
+
+
             <div class="row">
                 <div class="col h-auto bg-white shadow-lg rounded-3">
                     <h2>Manage Users Roles</h2>
@@ -27,6 +62,7 @@
                                 <th>Telephone</th>
                                 <th>Current Roles</th>
                                 <th>Add Roles</th>
+                                <th>Remove Roles</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -52,6 +88,18 @@
                                             <button type="submit" class="btn btn-success">Assign</button>
                                         </form>
                                     </td>
+                                    <td>
+                                        <form asp-controller="Admin" asp-action="RemoveRole" method="post" class="d-flex">
+                                            <input type="hidden" name="userID" value="@user.Id" />
+                                            <select name="roleName" class="form-select">
+                                                @foreach (var role in currentuserRoles){
+                                                    <option value="@role">@role</option>
+                                                }
+                                            </select>
+                                            <button type="submit" class="btn btn-danger">Remove</button>
+                                        </form>
+                                    </td>
+
                                 </tr>
                             }
                         </tbody>

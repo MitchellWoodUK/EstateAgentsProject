@@ -67,5 +67,51 @@ namespace EstateAgents.Controllers
             return RedirectToAction("Index");
         }
 
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveRole(string userID, string roleName)
+        {
+            //find the user from the ID
+            var user = await _userManager.FindByIdAsync(userID);
+            if (user == null)
+            {
+                return BadRequest("Invalid User!");
+            }
+            //Add the role
+            await _userManager.RemoveFromRoleAsync(user, roleName);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddRole(string roleName)
+        {
+            //Validation checks
+            //Check if the role name is not null and check if the role doesnt already exist
+            if (!string.IsNullOrEmpty(roleName) && !await _roleManager.RoleExistsAsync(roleName))
+            {
+                //Create role
+                await _roleManager.CreateAsync(new IdentityRole(roleName));
+            }
+            else
+            {
+                //Error message
+                return BadRequest("Role already exists or is empty");
+            }
+            //refresh the page to show the new role.
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteRole(string roleID)
+        {
+            //Obtain the role
+            var role = await _roleManager.FindByIdAsync(roleID);
+            //Delete the role
+            await _roleManager.DeleteAsync(role);
+            return RedirectToAction("Index");
+        }
+
+
     }
 }
