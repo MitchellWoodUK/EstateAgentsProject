@@ -1,0 +1,63 @@
+﻿@{
+    ViewData["Title"] = "Search for a Property";
+}
+
+
+<div class="container">
+    <h2>Find a property:</h2>
+
+    <!--Form to search for properties-->
+    <form asp-action="Search" method="get">
+        <input type="text" name="search" class="form-control" placeholder="Your dream house awaits you..." />
+        <div class="row">
+            <div class="col-3">
+                <button type="submit" class="btn btn-custom mt-3 w-100">Search</button>
+
+            </div>
+            <div class="col-9 d-flex justify-content-end ">
+                <input type="number" name="minPrice" class="w-auto form-control mt-2 me-1" placeholder="Min Price" />
+                <input type="number" name="maxPrice" class="w-auto form-control mt-2 me-1" placeholder="Max Price" />
+                <input type="number" name="bedrooms" class="w-auto form-control mt-2 me-1" placeholder="Amount of Bedrooms" />
+                <input type="number" name="bathrooms" class="w-auto form-control mt-2 me-1" placeholder="Amount of Bathrooms" />
+            </div>
+        </div>
+        
+    </form>
+
+    <table class="table mt-5">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Address</th>
+                <th>Price</th>
+                <th>Bedrooms</th>
+                <th>Bathrooms</th>
+                <th>Parking</th>
+                <th>Description</th>
+                <th>Property Type</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var property in Model){
+                <tr>
+                    <td>@property.Title</td>
+                    <td>@property.Address</td>
+                    <td>@property.Price</td>
+                    <td>@property.AmountofBedrooms</td>
+                    <td>@property.AmountofBathrooms</td>
+                    <td>@property.AmountofParking</td>
+                    <td>@property.Description</td>
+                    <td>@property.PropertyType</td>
+                    <td>
+                        <a class="btn btn-custom" asp-action="Details" asp-route-id="@property.Id">View Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+
+
+</div>

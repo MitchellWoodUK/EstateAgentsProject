@@ -3,6 +3,7 @@ using EstateAgents.Migrations;
 using EstateAgents.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace EstateAgents.Controllers
 {
@@ -121,6 +122,45 @@ namespace EstateAgents.Controllers
             var property = _context.Properties.Find(id);
             return View(property);
         }
+
+
+        //GET: Property/Search
+        public async Task<IActionResult> Search(string search, int? minPrice, int? maxPrice, int? bedrooms, int? bathrooms)
+        {
+            //Get all the properties so that we can search through them
+            var properties = _context.Properties.AsQueryable();
+            //If the search criteria has been entered
+            if (!string.IsNullOrEmpty(search))
+            {
+                //Filter out the properties based on the users search criteria
+                properties = properties.Where(p =>
+                    p.Title.ToLower().Contains(search.ToLower()) ||
+                    p.Address.ToLower().Contains(search.ToLower()) ||
+                    p.Description.ToLower().Contains(search.ToLower()) 
+                    );
+            }
+            //Run individual searches for the filters
+            if (minPrice.HasValue)
+            {
+                properties = properties.Where(p => p.Price >= minPrice.Value);
+            }
+            if (maxPrice.HasValue)
+            {
+                properties = properties.Where(p => p.Price <= maxPrice.Value);
+            }
+            if (bedrooms.HasValue)
+            {
+                properties = properties.Where(p => p.AmountofBedrooms == bedrooms.Value);
+            }
+            if (bathrooms.HasValue)
+            {
+                properties = properties.Where(p => p.AmountofBathrooms == bathrooms.Value);
+            }
+
+            return View(await properties.ToListAsync());
+        }
+
+
 
 
     }
